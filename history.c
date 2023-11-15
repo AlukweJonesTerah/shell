@@ -4,11 +4,11 @@
  * @custom_info: parameter struct
  * Return: allocated string containg history file
  */
-char *custom_get_history_file(custom_info_t *custom_info)
+char *custom_get_history_file(custom_info_t *info)
 {
 	char *custom_buf, *custom_dir;
 
-	custom_dir = custom_getenv(custom_info, "HOME=");
+	custom_dir = custom_getenv(info, "HOME=");
 	if (!custom_dir)
 		return (NULL);
 	custom_buf = malloc(sizeof(char) * (custom_strlen(custom_dir)
@@ -27,10 +27,10 @@ char *custom_get_history_file(custom_info_t *custom_info)
  * @custom_info: the parameter struct
  * Return: 1 on success, else -1
  */
-int custom_write_history(custom_info_t *custom_info)
+int custom_write_history(custom_info_t *info)
 {
 	ssize_t fd;
-	char *filename = custom_get_history_file(custom_info);
+	char *filename = custom_get_history_file(info);
 	custom_list_t *node = NULL;
 
 	if (!filename)
@@ -39,7 +39,7 @@ int custom_write_history(custom_info_t *custom_info)
 	free(filename);
 	if (fd == -1)
 		return (-1);
-	for (node = custom_info->custom_history; node; node = node->next)
+	for (node = info->custom_history; node; node = node->next)
 	{
 		custom_putsfd(node->str, fd);
 		custom_putfd('\n', fd);
@@ -54,12 +54,12 @@ int custom_write_history(custom_info_t *custom_info)
  * @custom_info: the parameter struc
  * Return: histcount on success, 0 otherwise
  */
-int custom_read_history(custom_info_t *custom_info)
+int custom_read_history(custom_info_t *info)
 {
 	int i, last = 0, linecount = 0;
 	ssize_t fd, rdlen, fsize = 0;
 	struct stat st;
-	char *buf = NULL, *filename = custom_get_history_file(custom_info);
+	char *buf = NULL, *filename = custom_get_history_file(info);
 
 	if (!filename)
 		return (0);
@@ -83,17 +83,17 @@ int custom_read_history(custom_info_t *custom_info)
 		if (buf[i] == '\n')
 		{
 			buf[i] = 0;
-			custom_build_history_list(custom_info, buf + last, linecount++);
+			custom_build_history_list(info, buf + last, linecount++);
 			last = i + 1;
 		}
 	if (last != i)
-		custom_build_history_list(custom_info, buf + last, linecount++);
+		custom_build_history_list(info, buf + last, linecount++);
 	free(buf);
-	custom_info->custom_histcount = linecount;
+	info->custom_histcount = linecount;
 	while (custom_info->custom_histcount-- >= CUSTOM_HIST_MAX)
-		custom_delete_node_at_index(&(custom_info->custom_history), 0);
-	custom_renumber_history(custom_info);
-	return (custom_info->custom_histcount);
+		custom_delete_node_at_index(&(info->custom_history), 0);
+	custom_renumber_history(info);
+	return (info->custom_histcount);
 }
 
 /**
@@ -103,16 +103,16 @@ int custom_read_history(custom_info_t *custom_info)
  * @linecount: the history linecount, histcount
  * Return: Always 0
  */
-int custom_build_history_list(custom_info_t *custom_info,
+int custom_build_history_list(custom_info_t *info,
 char *custom_buf, int linecount)
 {
 	custom_list_t *node = NULL;
 
 	if (custom_info->custom_history)
-		node = custom_info->custom_history;
+		node = ->custom_history;
 	custom_add_node_end(&node, custom_buf, linecount);
-	if (!custom_info->custom_history)
-		custom_info->custom_history = node;
+	if (!info->custom_history)
+		info->custom_history = node;
 	return (0);
 }
 
@@ -121,9 +121,9 @@ char *custom_buf, int linecount)
  * @custom_info: Structure containing potential arguments. Used to maint
  * Return: the new histcount
  */
-int custom_renumber_history(custom_info_t *custom_info)
+int custom_renumber_history(custom_info_t *info)
 {
-	custom_list_t *node = custom_info->custom_history;
+	custom_list_t *node = info->custom_history;
 	int i = 0;
 
 	while (node)
@@ -131,5 +131,5 @@ int custom_renumber_history(custom_info_t *custom_info)
 		node->num = i++;
 		node = node->next;
 	}
-	return (custom_info->custom_histcount = i);
+	return (info->custom_histcount = i);
 }
