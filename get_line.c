@@ -7,7 +7,8 @@
  *
  * Return: bytes read
  */
-ssize_t custom_input_buf(custom_info_t *custom_info, char **custom_buf, size_t *custom_len)
+ssize_t custom_input_buf(custom_info_t *
+custom_info, char **custom_buf, size_t *custom_len)
 {
 	ssize_t r = 0;
 	size_t len_p = 0;
@@ -32,7 +33,8 @@ ssize_t custom_input_buf(custom_info_t *custom_info, char **custom_buf, size_t *
 			}
 			custom_info->custom_linecount_flag = 1;
 			custom_remove_comments(*custom_buf);
-			custom_build_history_list(custom_info, *custom_buf, custom_info->custom_histcount++);
+			custom_build_history_list(
+			custom_info, *custom_buf, custom_info->custom_histcount++);
 			/* if (_strchr(*custom_buf, ';')) is this a command chain? */
 			{
 				*custom_len = r;
@@ -81,7 +83,8 @@ ssize_t custom_get_input(custom_info_t *custom_info)
 		return (custom_strlen(p)); /* return length of current command */
 	}
 
-	*buf_p = custom_buf; /* else not a chain, pass back buffer from custom_getline() */
+	*buf_p = custom_buf; /* else not a*/
+/*chain, pass back buffer from custom_getline() */
 	return (r); /* return length of buffer from custom_getline() */
 }
 
@@ -93,7 +96,8 @@ ssize_t custom_get_input(custom_info_t *custom_info)
  *
  * Return: r
  */
-ssize_t custom_read_buf(custom_info_t *custom_info, char *custom_buf, size_t *i)
+ssize_t custom_read_buf(custom_info_t *
+custom_info, char *custom_buf, size_t *i)
 {
 	ssize_t r = 0;
 

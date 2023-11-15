@@ -36,7 +36,8 @@ int custom_is_chain(custom_info_t *info, char *buf, size_t *p)
 }
 
 /**
- * custom_check_chain - checks if we should continue chaining based on last status
+ * custom_check_chain - checks
+ * if we should continue chaining based on last status
  * @info: the parameter struct
  * @buf: the char buffer
  * @p: address of current position in buf
@@ -45,7 +46,8 @@ int custom_is_chain(custom_info_t *info, char *buf, size_t *p)
  *
  * Return: Void
  */
-void custom_check_chain(custom_info_t *info, char *buf, size_t *p, size_t i, size_t len)
+void custom_check_chain(custom_info_t *info,
+char *buf, size_t *p, size_t i, size_t len)
 {
 	size_t j = *p;
 

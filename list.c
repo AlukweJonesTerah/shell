@@ -8,7 +8,8 @@
  *
  * Return: size of list
  */
-custom_list_t *custom_add_node(custom_list_t **custom_head, const char *custom_str, int custom_num)
+custom_list_t *custom_add_node(custom_list_t **custom_head,
+const char *custom_str, int custom_num)
 {
 	custom_list_t *new_custom_head;
 
@@ -41,7 +42,8 @@ custom_list_t *custom_add_node(custom_list_t **custom_head, const char *custom_s
  *
  * Return: size of list
  */
-custom_list_t *custom_add_node_end(custom_list_t **custom_head, const char *custom_str, int custom_num)
+custom_list_t *custom_add_node_end(custom_list_t **custom_head,
+const char *custom_str, int custom_num)
 {
 	custom_list_t *new_custom_node, *custom_node;
 
@@ -74,7 +76,8 @@ custom_list_t *custom_add_node_end(custom_list_t **custom_head, const char *cust
 }
 
 /**
- * custom_print_list_str - prints only the str element of a custom_list_t linked list
+ * custom_print_list_str - prints only the str element
+ * of a custom_list_t linked list
  * @custom_h: pointer to first node
  *
  * Return: size of list
@@ -100,7 +103,8 @@ size_t custom_print_list_str(const custom_list_t *custom_h)
  *
  * Return: 1 on success, 0 on failure
  */
-int custom_delete_node_at_index(custom_list_t **custom_head, unsigned int custom_index)
+int custom_delete_node_at_index(custom_list_t **custom_head,
+unsigned int custom_index)
 {
 	custom_list_t *custom_node, *custom_prev_node;
 	unsigned int i = 0;
@@ -141,6 +145,7 @@ int custom_delete_node_at_index(custom_list_t **custom_head, unsigned int custom
 void custom_free_list(custom_list_t **custom_head_ptr)
 {
 	custom_list_t *custom_node, *custom_next_node, *custom_head;
+
 	if (!custom_head_ptr || !*custom_head_ptr)
 		return;
 	custom_head = *custom_head_ptr;

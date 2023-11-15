@@ -11,7 +11,8 @@ char *custom_get_history_file(custom_info_t *custom_info)
 	custom_dir = custom_getenv(custom_info, "HOME=");
 	if (!custom_dir)
 		return (NULL);
-	custom_buf = malloc(sizeof(char) * (custom_strlen(custom_dir) + custom_strlen(CUSTOM_HIST_FILE) + 2));
+	custom_buf = malloc(sizeof(char) * (custom_strlen(custom_dir)
+	+ custom_strlen(CUSTOM_HIST_FILE) + 2));
 	if (!custom_buf)
 		return (NULL);
 	custom_buf[0] = 0;
@@ -31,6 +32,7 @@ int custom_write_history(custom_info_t *custom_info)
 	ssize_t fd;
 	char *filename = custom_get_history_file(custom_info);
 	custom_list_t *node = NULL;
+
 	if (!filename)
 		return (-1);
 	fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
@@ -101,9 +103,11 @@ int custom_read_history(custom_info_t *custom_info)
  * @linecount: the history linecount, histcount
  * Return: Always 0
  */
-int custom_build_history_list(custom_info_t *custom_info, char *custom_buf, int linecount)
+int custom_build_history_list(custom_info_t *custom_info,
+char *custom_buf, int linecount)
 {
 	custom_list_t *node = NULL;
+
 	if (custom_info->custom_history)
 		node = custom_info->custom_history;
 	custom_add_node_end(&node, custom_buf, linecount);

@@ -48,7 +48,8 @@ int changeDirectory(custom_info_t *shellInfo)
 		newDir = _getEnvironmentVariable(shellInfo, "HOME=");
 		if (!newDir)
 			chdirReturn = /* TODO: what should this be? */
-				chdir((newDir = _getEnvironmentVariable(shellInfo, "PWD=")) ? newDir : "/");
+				chdir((newDir = _getEnvironmentVariable
+				(shellInfo, "PWD=")) ? newDir : "/");
 		else
 			chdirReturn = chdir(newDir);
 	}
@@ -62,7 +63,8 @@ int changeDirectory(custom_info_t *shellInfo)
 		}
 		_puts(_getEnvironmentVariable(shellInfo, "OLDPWD=")), _putchar('\n');
 		chdirReturn = /* TODO: what should this be? */
-			chdir((newDir = _getEnvironmentVariable(shellInfo, "OLDPWD=")) ? newDir : "/");
+			chdir((newDir = _getEnvironmentVariable
+			(shellInfo, "OLDPWD=")) ? newDir : "/");
 	}
 	else
 		chdirReturn = chdir(shellInfo->argv[1]);
@@ -73,7 +75,8 @@ int changeDirectory(custom_info_t *shellInfo)
 	}
 	else
 	{
-		_setEnvironmentVariable(shellInfo, "OLDPWD", _getEnvironmentVariable(shellInfo, "PWD="));
+		_setEnvironmentVariable
+		(shellInfo, "OLDPWD", _getEnvironmentVariable(shellInfo, "PWD="));
 		_setEnvironmentVariable(shellInfo, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);

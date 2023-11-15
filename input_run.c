@@ -100,7 +100,8 @@ void custom_find_cmd(custom_info_t *custom_info)
 	if (!k)
 		return;
 
-	path = custom_find_path(custom_info, _getenv(custom_info, "PATH="), custom_info->argv[0]);
+	path = custom_find_path(custom_info,
+	_getenv(custom_info, "PATH="), custom_info->argv[0]);
 	if (path)
 	{
 		custom_info->path = path;
@@ -109,7 +110,8 @@ void custom_find_cmd(custom_info_t *custom_info)
 	else
 	{
 		if ((interactive(custom_info) || _getenv(custom_info, "PATH=")
-			|| custom_info->argv[0][0] == '/') && is_cmd(custom_info, custom_info->argv[0]))
+			|| custom_info->argv[0][0] == '/')
+			&& is_cmd(custom_info, custom_info->argv[0]))
 			custom_fork_cmd(custom_info);
 		else if (*(custom_info->arg) != '\n')
 		{
@@ -138,7 +140,8 @@ void custom_fork_cmd(custom_info_t *custom_info)
 	}
 	if (custom_child_pid == 0)
 	{
-		if (execve(custom_info->path, custom_info->argv, get_environ(custom_info)) == -1)
+		if (execve(custom_info->path,
+		custom_info->argv, get_environ(custom_info)) == -1)
 		{
 			free_info(custom_info, 1);
 			if (errno == EACCES)

@@ -37,7 +37,8 @@ void custom_ffree(char **custom_pp)
  * @custom_new_size: byte size of new block
  * Return: pointer to da ol'block nameen.
  */
-void *custom_realloc(void *custom_ptr, unsigned int custom_old_size, unsigned int custom_new_size)
+void *custom_realloc(void *
+custom_ptr, unsigned int custom_old_size, unsigned int custom_new_size)
 {
 	char *p;
 
@@ -52,7 +53,8 @@ void *custom_realloc(void *custom_ptr, unsigned int custom_old_size, unsigned in
 	if (!p)
 		return (NULL);
 
-	custom_old_size = custom_old_size < custom_new_size ? custom_old_size : custom_new_size;
+	custom_old_size = custom_old_size <
+	custom_new_size ? custom_old_size : custom_new_size;
 	while (custom_old_size--)
 		p[custom_old_size] = ((char *)custom_ptr)[custom_old_size];
 	free(custom_ptr);

@@ -46,7 +46,8 @@ char *custom_dup_chars(char *custom_pathstr, int custom_start, int custom_stop)
  * @custom_cmd: the cmd to find
  * Return: full path of cmd if found or NULL
  */
-char *custom_find_path(custom_info_t *info, char *custom_pathstr, char *custom_cmd)
+char *custom_find_path(custom_info_t *info, char
+*custom_pathstr, char *custom_cmd)
 {
 	int i = 0, curr_pos = 0;
 	char *path;

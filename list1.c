@@ -87,7 +87,8 @@ size_t custom_print_list(const custom_list_t *current_node)
  *
  * Return: match node or null
  */
-custom_list_t *custom_node_starts_with(custom_list_t *current_node, char *prefix, char c)
+custom_list_t *custom_node_starts_with(custom_list_t *
+current_node, char *prefix, char c)
 {
 	char *p = NULL;
 
